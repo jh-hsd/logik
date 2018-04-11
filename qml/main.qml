@@ -29,8 +29,8 @@ Window {
         orientation: Qt.Horizontal
 
         Selection {
-            Layout.minimumWidth: 0.1 * parent.width
-            Layout.maximumWidth: 0.3 * parent.width
+            Layout.minimumWidth: 0.3 * parent.width
+            Layout.maximumWidth: 0.5 * parent.width
         }
 
         Project {}
