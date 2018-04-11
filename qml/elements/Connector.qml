@@ -9,7 +9,7 @@ Rectangle {
         width: 3
         color: _input ? "yellow" : "blue"
     }
-    color: !!value ? "white" : "grey"
+    color: !!value ? "white" : "black"
 
     property string direction: "in"
     property alias name: nameText.text
