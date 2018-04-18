@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="/">
+    <file>main.qml</file>
+    <file>Project.qml</file>
+    <file>Selection.qml</file>
+    <file>Button.qml</file>
+    <file>Wire.qml</file>
+
+    <file>elements/And2.qml</file>
+    <file>elements/Connector.qml</file>
+    <file>elements/Element.qml</file>
+    <file>elements/Gpi.qml</file>
+    <file>elements/Gpo.qml</file>
+    <file>elements/Not.qml</file>
+    <file>elements/Or2.qml</file>
+</qresource>
+</RCC>

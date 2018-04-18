@@ -5,7 +5,8 @@ Element {
 
     desc: "GPI"
     name: "input"
-    outputs: ["OUT1"]
+    archs: ["RPi"]
+    outputs: ["OUT"]
 
-    onOutputClicked: setOutput(n, !getOutput(n))
+    onModify: conn.value = !conn.value
 }

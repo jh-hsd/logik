@@ -5,5 +5,8 @@ Element {
 
     desc: "GPO"
     name: "output"
-    inputs: ["IN1"]
+    archs: ["RPi"]
+    inputs: ["IN"]
+
+    onModify: conn.value = !conn.value
 }

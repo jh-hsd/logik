@@ -5,6 +5,16 @@ Element {
 
     desc: "!"
     name: "not"
-    inputs: ["IN1"]
-    outputs: ["OUT1"]
+    inputs: ["IN"]
+    outputs: ["OUT"]
+
+    onModify: {
+        if (conn.direction == "in")
+            conn.value = !conn.value;
+    }
+
+    onEvaluate: {
+        var s = getInputByName("IN");
+        setOutputByName("OUT", !s);
+    }
 }

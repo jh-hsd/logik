@@ -1,0 +1,6 @@
+moc_*
+*.o
+qrc_qml.cpp
+Makefile
+.qmake.stash
+logik
