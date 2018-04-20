@@ -1,5 +1,4 @@
 import QtQuick 2.7
-
 import org.jh 1.0
 
 BaseWire {
