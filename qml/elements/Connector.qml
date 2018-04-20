@@ -1,25 +1,12 @@
 import QtQuick 2.7
+import org.jh 1.0
 
-Rectangle {
+BaseConnector {
     id: connector
     focus: mouse.containsMouse
     width: connectorSize
     height: width /* square */
-    radius: _input ? 0.5 * width /* circle */ : 0
-    border {
-        width: 3
-        color: mouse.containsMouse ? "grey" : "lightgrey"
-    }
-    color: !!value ? "yellow" : "white"
 
-    property string direction: "in"
-    property alias name: nameText.text
-
-    property bool _input: direction == "in"
-    property bool _output: !_input
-    property var owner: null
-
-    property int value: 0
     onValueChanged: log("Connector '" + name + "': " + value);
 
     signal clicked()
@@ -34,7 +21,7 @@ Rectangle {
     Keys.onPressed: {
         switch (event.key) {
         case Qt.Key_W: /* draw wire */
-            if (_output)
+            if (output)
                 connector.startWire(connector);
             break;
         case Qt.Key_M: /* change input/output */
@@ -45,12 +32,23 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.fill: parent
+        radius: input ? 0.5 * width /* circle */ : 0
+        border {
+            width: 3
+            color: mouse.containsMouse ? "grey" : "lightgrey"
+        }
+        color: !!value ? "yellow" : "white"
+    }
+
     Text {
         id: nameText
         font.pixelSize: 0.5 * parent.height
+        text: connector.name
         anchors {
-            bottom: parent._output ? parent.top : undefined
-            top: parent._input ? parent.bottom : undefined
+            bottom: connector.output ? parent.top : undefined
+            top: connector.input ? parent.bottom : undefined
             horizontalCenter: parent.horizontalCenter
         }
     }

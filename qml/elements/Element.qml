@@ -120,7 +120,7 @@ BaseElement {
         Repeater {
             model: inputs
             delegate: Connector {
-                direction: "in"
+                direction: Connector.In
                 name: modelData
                 owner: element
                 onClicked: element.inputClicked(name)
@@ -143,7 +143,7 @@ BaseElement {
         Repeater {
             model: outputs
             delegate: Connector {
-                direction: "out"
+                direction: Connector.Out
                 name: modelData
                 owner: element
                 onClicked: element.outputClicked(name)
