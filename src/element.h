@@ -18,12 +18,12 @@ public:
     Element(QQuickItem *parent = Q_NULLPTR);
     virtual ~Element();
 
-    QString name() const { return _name; };
-    QString desc() const { return _desc; };
+    const QString &name() const { return _name; };
+    const QString &desc() const { return _desc; };
 
-    QStringList archs() const { return _archs; };
-    QStringList inputs() const { return _inputs; };
-    QStringList outputs() const { return _outputs; };
+    const QStringList &archs() const { return _archs; };
+    const QStringList &inputs() const { return _inputs; };
+    const QStringList &outputs() const { return _outputs; };
 
     void setName(QString &name);
     void setDesc(QString &desc);
