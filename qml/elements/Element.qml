@@ -7,8 +7,8 @@ BaseElement {
     height: 100
     visible: (!architecture || archs.indexOf(architecture) >= 0)
              
-    name: "<name>"
-    desc: "<desc>"
+    name: "<?>"
+    desc: "<?>"
     archs: ["RPi", "Arduino"]
 
     property int _maxConnectors: Math.max(inputs.length, outputs.length)
