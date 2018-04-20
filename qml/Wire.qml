@@ -7,23 +7,6 @@ BaseWire {
     width: strength
     height: width
 
-    property var input: null
-    property var inputElement: null
-    property var output: null
-    property var outputElement: null
-
-    property real dx: 0.0
-    property real dy: 0.0
-    property real dxAbs: Math.abs(dx)
-    property real dyAbs: Math.abs(dy)
-    /* 0 | 1
-       --+--
-       2 | 3 */
-    property int _quadrant: {
-        if (dy < 0)
-            return (dx < 0 ? 0 : 1);
-        return (dx < 0 ? 2 : 3);
-    }
     property real strength: connectorSize / 4
 
     Component {
@@ -31,17 +14,17 @@ BaseWire {
 
         Rectangle {
             opacity: 0.5
-            x: switch (_quadrant) {
-                case 0: return horizontal ? xStart + wire.dx : xStart;
-                case 1: return xStart;
-                case 2: return horizontal ? xStart + wire.dx : xStart;
-                case 3: return xStart;
+            x: switch (quadrant) {
+                case BaseWire.TOP_LEFT: return horizontal ? xStart + wire.dx : xStart;
+                case BaseWire.TOP_RIGHT: return xStart;
+                case BaseWire.BOTTOM_LEFT: return horizontal ? xStart + wire.dx : xStart;
+                case BaseWire.BOTTOM_RIGHT: return xStart;
             }
-            y: switch (_quadrant) {
-                case 0: return horizontal ? yStart : yStart + wire.dy;
-                case 1: return horizontal ? yStart : yStart + wire.dy;
-                case 2: return yStart;
-                case 3: return yStart;
+            y: switch (quadrant) {
+                case BaseWire.TOP_LEFT: return horizontal ? yStart : yStart + wire.dy;
+                case BaseWire.TOP_RIGHT: return horizontal ? yStart : yStart + wire.dy;
+                case BaseWire.BOTTOM_LEFT: return yStart;
+                case BaseWire.BOTTOM_RIGHT: return yStart;
             }
             width: vertical ? strength : dxAbs + strength
             height: horizontal ? strength : dyAbs + strength
