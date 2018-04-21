@@ -15,8 +15,8 @@ INCLUDEPATH += .
 DEFINES += QT_DEPRECATED_WARNINGS
 
 # Input
-HEADERS += src/element.h src/wire.h src/connector.h
+HEADERS += src/item.h src/element.h src/wire.h src/connector.h
 
-SOURCES += src/main.cpp src/element.cpp src/wire.cpp src/connector.cpp
+SOURCES += src/main.cpp src/item.cpp src/element.cpp src/wire.cpp src/connector.cpp
 
 RESOURCES += qml/qml.qrc

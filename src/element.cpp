@@ -1,27 +1,13 @@
 #include "element.h"
+#include "item.h"
 
 Element::Element(QQuickItem *parent) :
-    QQuickItem(parent)
+    Item(parent)
 {
 }
 
 Element::~Element()
 {
-}
-
-void Element::toXml(QXmlStreamWriter &stream)
-{
-    // FIXME: add missing implementation
-    Q_UNUSED(stream);
-    qDebug("Expose %s to XML", qPrintable(_name));
-}
-
-void Element::setName(QString &name)
-{
-    if (name != _name) {
-        _name = name;
-        Q_EMIT nameChanged();
-    }
 }
 
 void Element::setDesc(QString &desc)

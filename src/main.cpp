@@ -4,6 +4,7 @@
 #include "element.h"
 #include "connector.h"
 #include "wire.h"
+#include "item.h"
 
 int main(int argc, char *argv[])
 {

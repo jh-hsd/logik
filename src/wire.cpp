@@ -1,7 +1,7 @@
 #include "wire.h"
 
 Wire::Wire(QQuickItem *parent) :
-    QQuickItem(parent)
+    Item(parent)
 {
     connect(this, &Wire::segmentsChanged,
             this, &Wire::segmentCountChanged);
@@ -26,13 +26,6 @@ QQuickItem *Wire::lastSegment()
     if (_segments.empty())
         return Q_NULLPTR;
     return _segments.last();
-}
-
-void Wire::toXml(QXmlStreamWriter &stream)
-{
-    // FIXME: add missing implementation
-    Q_UNUSED(stream);
-    qDebug("Expose wire to XML");
 }
 
 void Wire::setSegments(QList<QQuickItem*> &segments)

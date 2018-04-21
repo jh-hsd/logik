@@ -1,7 +1,7 @@
 #include "connector.h"
 
 Connector::Connector(QQuickItem *parent) :
-    QQuickItem(parent),
+    Item(parent),
     _direction(In),
     _owner(Q_NULLPTR),
     _value(0)
@@ -14,13 +14,6 @@ Connector::Connector(QQuickItem *parent) :
 
 Connector::~Connector()
 {
-}
-
-void Connector::toXml(QXmlStreamWriter &stream)
-{
-    // FIXME: add missing implementation
-    Q_UNUSED(stream);
-    qDebug("Expose %s to XML", qPrintable(_name));
 }
 
 void Connector::setName(QString &name)

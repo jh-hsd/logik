@@ -2,15 +2,13 @@
 #define _WIRE_
 
 #include <QQuickItem>
-
-//#include "element.h"
-//#include "connector.h"
+#include "item.h"
 
 class QXmlStreamWriter;
 class Connector;
 class Element;
 
-class Wire : public QQuickItem {
+class Wire : public Item {
     Q_OBJECT
 
     Q_PROPERTY(QList<QQuickItem*> segments READ segments WRITE setSegments NOTIFY segmentsChanged)
@@ -47,7 +45,6 @@ public:
     Connector* output() const { return _output; };
     Element* inputElement() const { return _inputElement; };
     Element* outputElement() const { return _outputElement; };
-
     qreal dx() const { return _dx; };
     qreal dy() const { return _dy; };
     qreal dxAbs() const { return abs(_dx); };
@@ -60,23 +57,17 @@ public:
     void setOutput(Connector *output);
     void setInputElement(Element *input);
     void setOutputElement(Element *output);
-
     void setDx(qreal dx);
     void setDy(qreal dx);
-
-public Q_SLOTS:
-    virtual void toXml(QXmlStreamWriter &stream);
 
 Q_SIGNALS:
     void segmentsChanged();
     void lastSegmentChanged();
     void segmentCountChanged();
-
     void inputChanged();
     void outputChanged();
     void inputElementChanged();
     void outputElementChanged();
-
     void dxChanged();
     void dyChanged();
     void dxAbsChanged();
