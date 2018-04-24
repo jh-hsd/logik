@@ -44,6 +44,6 @@ void Connector::setValue(int value)
 {
     if (value != _value) {
         _value = value;
-        Q_EMIT valueChanged();
+        Q_EMIT valueChanged(_value);
     }
 }

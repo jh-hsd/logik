@@ -43,7 +43,7 @@ Q_SIGNALS:
     void outputChanged();
 
     void ownerChanged();
-    void valueChanged();
+    void valueChanged(int value);
 
 private:
     Direction _direction;
