@@ -52,13 +52,16 @@ public:
     Quadrant quadrant() const { return _quadrant; };
 
     void setSegments(QList<QQuickItem*> &segments);
-    Q_INVOKABLE void pushSegment(QQuickItem *segment);
     void setInput(Connector *input);
     void setOutput(Connector *output);
     void setInputElement(Element *input);
     void setOutputElement(Element *output);
     void setDx(qreal dx);
     void setDy(qreal dx);
+
+    Q_INVOKABLE void pushSegment(QQuickItem *segment);
+    Q_INVOKABLE void connectTo(Element *element,
+                               Connector *connector);
 
 Q_SIGNALS:
     void segmentsChanged();
@@ -78,10 +81,10 @@ private:
     void checkQuadrant();
 
     QList<QQuickItem*> _segments;
-    Connector *_input;
-    Connector *_output;
-    Element *_inputElement;
-    Element *_outputElement;
+    Connector *_input = NULL;
+    Connector *_output = NULL;
+    Element *_inputElement = NULL;
+    Element *_outputElement = NULL;
     qreal _dx;
     qreal _dy;
     Quadrant _quadrant;

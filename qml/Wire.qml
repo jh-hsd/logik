@@ -53,16 +53,6 @@ BaseWire {
         lastSegment.opacity= 1.0;
     }
 
-    function _setElemConn(elem, conn) {
-        if (conn.direction == "in") {
-            input = conn;
-            inputElement = elem;
-        } else {
-            output = conn;
-            outputElement = elem;
-        }
-    }
-
     function _adjust(pos, elem) {
         var p = Qt.point(x + lastSegment.xStart, y + lastSegment.yStart);
         switch (elem.rotation) {
@@ -89,11 +79,11 @@ BaseWire {
         wire.x = pos.x;
         wire.y = pos.y;
         _newSegment();
-        _setElemConn(elem, conn);
+        connectTo(elem, conn);
     }
 
     function addSegment() {
-        var s = lastSegment;
+        var s = lastSegment; /* save current segment */
         _newSegment();
         lastSegment.xStart = s.x;
         lastSegment.yStart = s.y;
@@ -111,14 +101,11 @@ BaseWire {
         log("Wire.release: x/y: " + pos.x + " / " + pos.y);
         _adjust(pos, elem);
         _freezeSegment();
-        _setElemConn(elem, conn);
-        /* bind output to input */
-        input.value = Qt.binding(function() { return output.value });
+        connectTo(elem, conn);
     }
 
     function update(pos) {
-        log("Wire.update: x/y: " + pos.x + " / " + pos.y);
-        dx = pos.x - (x + lastSegment.xStart);
-        dy = pos.y - (y + lastSegment.yStart);
+        dx = pos.x - (x + lastSegment.xStart) - lastSegment.radius;
+        dy = pos.y - (y + lastSegment.yStart) - lastSegment.radius;
     }
 }

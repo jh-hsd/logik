@@ -1,4 +1,6 @@
 #include "wire.h"
+#include "connector.h"
+#include "element.h"
 
 Wire::Wire(QQuickItem *parent) :
     Item(parent)
@@ -34,13 +36,6 @@ void Wire::setSegments(QList<QQuickItem*> &segments)
         _segments = segments;
         Q_EMIT segmentsChanged();
     }
-}
-
-void Wire::pushSegment(QQuickItem *segment)
-{
-    qDebug("adding segment to list");
-    _segments << segment;
-    Q_EMIT segmentsChanged();
 }
 
 void Wire::setInput(Connector *input) {
@@ -82,6 +77,38 @@ void Wire::setDy(qreal dy) {
     if (dy != _dy) {
         _dy = dy;
         Q_EMIT dyChanged();
+    }
+}
+
+void Wire::pushSegment(QQuickItem *segment)
+{
+    qDebug("adding segment to list");
+    _segments << segment;
+    Q_EMIT segmentsChanged();
+}
+
+void Wire::connectTo(Element *element,
+                     Connector *connector)
+{
+    Q_ASSERT(element);
+    Q_ASSERT(connector);
+    
+    qDebug("connect with element connector %s-%s",
+           qPrintable(element->name()),
+           qPrintable(connector->name()));
+
+    if (connector->direction() == Connector::In) {
+        Q_ASSERT(_output);
+        Q_ASSERT(!_input);
+        setInput(connector);
+        setInputElement(element);
+        connect(_output, &Connector::valueChanged,
+                _input, &Connector::setValue);
+    } else {
+        Q_ASSERT(!_input);
+        Q_ASSERT(!_output);
+        setOutput(connector);
+        setOutputElement(element);
     }
 }
 
