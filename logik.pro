@@ -14,6 +14,9 @@ INCLUDEPATH += .
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
+MOC_DIR += build
+OBJECTS_DIR += build
+
 # Input
 HEADERS += src/item.h src/element.h src/wire.h src/connector.h
 
