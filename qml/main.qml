@@ -13,8 +13,8 @@ Window {
 
     property int connectorSize: 20
     property int connectorSpacing: 10
-    property string architecture: ""
-    property var supportedArchitectures: ["RPi", "Arduino"]
+    property string architecture: "RPi"
+    property var supportedArchitectures: ["RPi", "Arduino", "Component"]
 
     property bool _debug: true
 

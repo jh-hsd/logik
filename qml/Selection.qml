@@ -40,6 +40,12 @@ ColumnLayout {
         Element.Gpo {
             onClicked: selection.placeInProject("Gpo")
         }
+        Element.PadIn {
+            onClicked: selection.placeInProject("PadIn")
+        }
+        Element.PadOut {
+            onClicked: selection.placeInProject("PadOut")
+        }
     }
 
     Button {
