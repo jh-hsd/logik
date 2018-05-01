@@ -3,8 +3,8 @@ import org.jh 1.0
 
 BaseElement {
     id: element
-    width: Math.max(_minWidth, height)
-    height: 100
+    width: visible ? Math.max(_minWidth, height) : 0
+    height: visible ? 100 : 0
     visible: (!architecture || archs.indexOf(architecture) >= 0)
     
     name: "<?>"

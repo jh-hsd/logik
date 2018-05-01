@@ -29,6 +29,8 @@ Window {
     property string operationMode: "sim" /* sim | run */
 
     property var architectures: ["RPi", "Arduino", "Component"]
+    property var elements: ["Not", "And", "Or", "Gpi", "Gpo",
+                            "Pwm", "PadIn", "PadOut"]
 
     property bool _debug: true
 

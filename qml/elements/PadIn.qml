@@ -4,7 +4,7 @@ import ".."
 Element {
     id: padIn
 
-    desc: "PAD"
+    desc: "Pad"
     name: "input"
     archs: ["Component"]
     outputs: ["OUT"]

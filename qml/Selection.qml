@@ -49,29 +49,19 @@ ColumnLayout {
         Layout.preferredWidth: width
         Layout.fillHeight: true
 
-        Element.Not {
-            onClicked: selection.placeInProject("Not")
-        }
-        Element.And2 {
-            onClicked: selection.placeInProject("And2")
-        }
-        Element.Or2 {
-            onClicked: selection.placeInProject("Or2")
-        }
-        Element.Gpi {
-            onClicked: selection.placeInProject("Gpi")
-        }
-        Element.Gpo {
-            onClicked: selection.placeInProject("Gpo")
-        }
-        Element.PadIn {
-            onClicked: selection.placeInProject("PadIn")
-        }
-        Element.PadOut {
-            onClicked: selection.placeInProject("PadOut")
-        }
-    }
+        Repeater {
+            model: main.elements
+            delegate: Loader {
+                id: elementLoader
+                asynchronous: false
+                source: "./elements/" + modelData + ".qml"
 
+                Connections {
+                    target: item
+                    ignoreUnknownSignals: true
+                    onClicked: selection.placeInProject(modelData);
+                }
+            }
         }
     }
 }
