@@ -8,13 +8,27 @@ Window {
     visible: true
     width: 1280
     height: 800
-    title: "Logik"
+    title: {
+        var s = "Logik [ Mode: ";
+        switch (operationMode) {
+        case "sim":
+            s += "Simulation";
+            break;
+        case "run":
+            s += "Run";
+            break;
+        }
+        s += " ]";
+        return s;
+    }
     color: "grey"
 
     property int connectorSize: 20
     property int connectorSpacing: 10
     property string architecture: "RPi"
-    property var supportedArchitectures: ["RPi", "Arduino", "Component"]
+    property string operationMode: "sim" /* sim | run */
+
+    property var architectures: ["RPi", "Arduino", "Component"]
 
     property bool _debug: true
 

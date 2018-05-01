@@ -10,11 +10,35 @@ ColumnLayout {
     signal placeInProject(string comp)
 
     Button {
-        text: "Simulate"
+        text: {
+            switch (main.operationMode) {
+            case "sim" : return "Run";
+            case "run" : return "Simulation";
+            }
+        }
+        onClicked: {
+            switch (main.operationMode) {
+            case "sim" :
+                main.operationMode = "run";
+                break;
+            case "run" :
+                main.operationMode = "sim";
+                break;
+            }
+        }
     }
 
     Button {
-        text: "Run"
+        text: "Architecture<br><b>" + architecture + "</b>"
+        active: !!architecture
+
+        onClicked: {
+            var i = main.architectures.indexOf(architecture);
+            i++;
+            if (i == main.architectures.length)
+                i = 0;
+            architecture = main.architectures[i];
+        }
     }
     
     Flow {
@@ -48,16 +72,6 @@ ColumnLayout {
         }
     }
 
-    Button {
-        text: "Architecture<br><b>" + architecture + "</b>"
-        active: !!architecture
-
-        onClicked: {
-            var i = supportedArchitectures.indexOf(architecture);
-            i++;
-            if (i == supportedArchitectures.length)
-                i = 0;
-            architecture = supportedArchitectures[i];
         }
     }
 }
