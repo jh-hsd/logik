@@ -4,8 +4,8 @@ import ".."
 Element {
     id: gpi
 
-    desc: "GPI"
-    name: "input"
+    desc: qsTr("GPI")
+    name: qsTr("input")
     archs: ["RPi"]
     outputs: ["OUT"]
 

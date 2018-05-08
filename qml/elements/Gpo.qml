@@ -4,10 +4,8 @@ import ".."
 Element {
     id: gpo
 
-    desc: "GPO"
-    name: "output"
+    desc: qsTr("GPO")
+    name: qsTr("output")
     archs: ["RPi"]
     inputs: ["IN"]
-
-    onModify: conn.value = !conn.value
 }

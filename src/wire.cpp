@@ -110,6 +110,11 @@ void Wire::connectTo(Element *element,
         setOutput(connector);
         setOutputElement(element);
     }
+
+    // delete wire if connected element changes rotation or position
+    connect(element, SIGNAL(rotationChanged()), this, SLOT(deleteLater()));
+    connect(element, SIGNAL(xChanged()), this, SLOT(deleteLater()));
+    connect(element, SIGNAL(yChanged()), this, SLOT(deleteLater()));
 }
 
 void Wire::checkQuadrant() {

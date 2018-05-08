@@ -1,9 +1,13 @@
 #include "element.h"
 #include "item.h"
 
+int Element::_idCount = 0;
+
 Element::Element(QQuickItem *parent) :
     Item(parent)
 {
+    _id = QString("%1").arg(Element::_idCount);
+    Element::_idCount++;
 }
 
 Element::~Element()

@@ -7,26 +7,31 @@ BaseConnector {
     width: connectorSize
     height: width /* square */
 
-    onValueChanged: log("Connector '" + name + "': " + value);
+    property bool topValue: true
+
+    onValueChanged: {
+        timeout.restart();
+        log("Connector '" + name + "': " + value);
+    }
 
     signal clicked()
-    signal modify(var conn)
+    signal modify(var conn, int direction)
     signal startWire(var conn)
     signal stopWire(var conn)
+
+    function checkModify(conn, direction) {
+        if (!simulation) return;
+        if (connector.direction == BaseConnector.In) return;
+        modify(conn, direction);
+    }
 
     onClicked: log("connector.clicked")
     onStartWire: log("connector.startWire: " + conn.name)
     onStopWire: log("connector.stopWire: " + conn.name)
+    onModify: log("connector.modify: " + conn.name + " -> " + direction)
             
     Keys.onPressed: {
         switch (event.key) {
-        case Qt.Key_W: /* draw wire */
-            if (output)
-                connector.startWire(connector);
-            break;
-        case Qt.Key_M: /* change input/output */
-            connector.modify(connector);
-            break;
         default:
             console.log("unsupported shortcut");
         }
@@ -53,19 +58,56 @@ BaseConnector {
         }
     }
 
+    Rectangle {
+        id: valueChangedNotifier
+        width: 2 * connector.height
+        height: connector.height
+        anchors.left: connector.left
+        anchors.bottom: topValue ? connector.top : undefined
+        anchors.top: !topValue ? connector.bottom : undefined
+        opacity: timeout.running
+        color: "yellow"
+
+        Text {
+            id: label
+            anchors.centerIn: parent
+            horizontalAlignment: Text.AlignHCenter
+            text: connector.value
+        }
+
+        Timer {
+            id: timeout
+            running: false
+            repeat: false
+            interval: 1 * 1000
+        }
+
+        Behavior on opacity {
+            NumberAnimation { duration: 200 }
+        }
+    }
+
     MouseArea {
         id: mouse
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
 
+        onWheel: {
+            var d = wheel.angleDelta.y > 0 ? +1 : -1;
+            connector.checkModify(connector, d);
+        }
+        
         onClicked: {
             switch (mouse.button) {
             case Qt.LeftButton:
-                connector.clicked();
+                connector.checkModify(connector, +1);
                 break;
             case Qt.RightButton:
-                connector.stopWire(connector);
+                if (output)
+                    connector.startWire(connector);
+                else
+                    connector.stopWire(connector);
                 break;
             }
         }

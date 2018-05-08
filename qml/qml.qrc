@@ -7,14 +7,15 @@
     <file>Wire.qml</file>
     <file>Connector.qml</file>
     <file>Element.qml</file>
+    <file>Notifier.qml</file>
+    <file>ParameterEntry.qml</file>
 
     <file>elements/And.qml</file>
     <file>elements/Or.qml</file>
     <file>elements/Not.qml</file>
+    <file>elements/Gate.qml</file>
     <file>elements/Gpi.qml</file>
     <file>elements/Gpo.qml</file>
     <file>elements/Pwm.qml</file>
-    <file>elements/PadIn.qml</file>
-    <file>elements/PadOut.qml</file>
 </qresource>
 </RCC>

@@ -17,7 +17,7 @@ BaseElement {
     property alias dragable: mouse.dragActive
 
     signal clicked()
-    signal modify(var conn)
+    signal modify(var conn, int direction)
     signal inputClicked(string name)
     signal outputClicked(string name)
     signal evaluate()
@@ -27,10 +27,8 @@ BaseElement {
     onClicked: log("element.clicked")
     onInputClicked: log("element.inputClicked: " + name)
     onOutputClicked: log("element.outputClicked: " + name)
-    onStartWire: log("element.startWire: " + element.name +
-                     ":" + conn.name)
-    onStopWire: log("element.stopWire: " + element.name +
-                    ":" + conn.name)
+    onStartWire: log("element.startWire: " + element.name + ":" + conn.name)
+    onStopWire: log("element.stopWire: " + element.name + ":" + conn.name)
 
     Component.onCompleted: {
         console.log("Element position: (x/y/width/height)",
@@ -98,6 +96,7 @@ BaseElement {
     MouseArea {
         id: mouse
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         drag {
             target: dragActive ? element : null
             threshold: 10
@@ -106,7 +105,15 @@ BaseElement {
 
         property bool dragActive: false
 
-        onClicked: element.clicked()
+        onClicked: {
+            switch (mouse.button) {
+            case Qt.LeftButton:
+                element.clicked();
+                break;
+            case Qt.RightButton:
+                break;
+            }
+        }
     }
 
     Row {
@@ -123,8 +130,9 @@ BaseElement {
                 direction: Connector.In
                 name: modelData
                 owner: element
+                topValue: true
                 onClicked: element.inputClicked(name)
-                onModify: element.modify(conn)
+                onModify: element.modify(conn, direction)
                 onStartWire: element.startWire(element, conn)
                 onStopWire: element.stopWire(element, conn)
                 onValueChanged: element.evaluate()
@@ -146,8 +154,9 @@ BaseElement {
                 direction: Connector.Out
                 name: modelData
                 owner: element
+                topValue: false
                 onClicked: element.outputClicked(name)
-                onModify: element.modify(conn)
+                onModify: element.modify(conn, direction)
                 onStartWire: element.startWire(element, conn)
                 onStopWire: element.stopWire(element, conn)
             }

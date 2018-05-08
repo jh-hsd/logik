@@ -27,10 +27,11 @@ Window {
     property int connectorSpacing: 10
     property string architecture: "RPi"
     property string operationMode: "sim" /* sim | run */
+    property bool simulation: operationMode == "sim"
 
-    property var architectures: ["RPi", "Arduino", "Component"]
-    property var elements: ["Not", "And", "Or", "Gpi", "Gpo",
-                            "Pwm", "PadIn", "PadOut"]
+    property var architectures: ["RPi", "Arduino"]
+    property var elements: ["Not", "And", "Or",, "Gate",
+                            "Gpi", "Gpo", "Pwm"]
 
     property bool _debug: true
 

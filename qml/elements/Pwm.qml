@@ -4,15 +4,18 @@ import ".."
 Element {
     id: pwm
 
-    desc: "PWM"
-    name: "control"
+    desc: qsTr("PWM")
+    name: qsTr("control")
     archs: ["RPi", "Arduino"]
     outputs: ["OUT"]
 
     onModify: {
-        if (conn.value == 255)
+        var v = conn.value + direction;
+        if (v == 256)
+            conn.value = 255;
+        else if (v < 0)
             conn.value = 0;
         else
-            conn.value += 1;
+            conn.value = v;
     }
 }

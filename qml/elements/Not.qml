@@ -4,15 +4,10 @@ import ".."
 Element {
     id: not
 
-    desc: "!"
-    name: "not"
+    desc: qsTr("!")
+    name: qsTr("not")
     inputs: ["IN"]
     outputs: ["OUT"]
-
-    onModify: {
-        if (conn.direction == "in")
-            conn.value = !conn.value;
-    }
 
     onEvaluate: {
         var s = getInputByName("IN");

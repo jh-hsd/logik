@@ -2,17 +2,12 @@ import QtQuick 2.7
 import ".."
 
 Element {
-    id: or2
+    id: or
 
-    desc: "|"
-    name: "or2"
+    desc: qsTr("|")
+    name: qsTr("or")
     inputs: ["IN1", "IN2"]
     outputs: ["OUT"]
-
-    onModify: {
-        if (conn.direction == "in")
-            conn.value = !conn.value;
-    }
 
     onEvaluate: {
         var a = getInputByName("IN1");

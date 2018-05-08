@@ -8,6 +8,10 @@ Rectangle {
         
     property var _wire: null
 
+    function notify(text) {
+        notifier.show(text);
+    }
+
     function startWire(elem, conn) {
         if (!!_wire) return;
         var comp = Qt.createComponent("Wire.qml");
@@ -61,4 +65,10 @@ Rectangle {
                 _wire.update(Qt.point(mouse.x, mouse.y));
         }
     }
+
+    Notifier {
+        id: notifier
+    }
+
+    /* ParameterEntry {} */
 }
