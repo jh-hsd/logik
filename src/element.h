@@ -28,6 +28,9 @@ public:
     void setInputs(QStringList &inputs);
     void setOutputs(QStringList &outputs);
 
+public Q_SLOTS:
+    virtual void toXml(QXmlStreamWriter &stream);
+
 Q_SIGNALS:
     void descChanged();
     void archsChanged();

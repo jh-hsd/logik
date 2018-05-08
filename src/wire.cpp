@@ -117,6 +117,11 @@ void Wire::connectTo(Element *element,
     connect(element, SIGNAL(yChanged()), this, SLOT(deleteLater()));
 }
 
+void Wire::toXml(QXmlStreamWriter &stream) {
+    Q_UNUSED(stream);
+    Q_ASSERT(false);
+}
+
 void Wire::checkQuadrant() {
     Quadrant q;
     if (_dy < 0)

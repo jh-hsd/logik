@@ -47,3 +47,8 @@ void Connector::setValue(int value)
         Q_EMIT valueChanged(_value);
     }
 }
+
+void Connector::toXml(QXmlStreamWriter &stream) {
+    Q_UNUSED(stream);
+    Q_ASSERT(false);
+}

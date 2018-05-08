@@ -39,3 +39,8 @@ void Element::setOutputs(QStringList &outputs)
     _outputs = outputs;
     Q_EMIT outputsChanged();
 }
+
+void Element::toXml(QXmlStreamWriter &stream) {
+    Q_UNUSED(stream);
+    Q_ASSERT(false);
+}

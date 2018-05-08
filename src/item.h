@@ -18,7 +18,8 @@ public:
     virtual void setName(QString &name);
 
 public Q_SLOTS:
-    virtual void toXml(QXmlStreamWriter &stream);
+    virtual void toXml(QXmlStreamWriter &stream) = 0;
+    virtual void toArduino(QTextStream &stream);
 
 Q_SIGNALS:
     void nameChanged();

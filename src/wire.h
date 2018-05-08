@@ -63,6 +63,9 @@ public:
     Q_INVOKABLE void connectTo(Element *element,
                                Connector *connector);
 
+public Q_SLOTS:
+    virtual void toXml(QXmlStreamWriter &stream);
+
 Q_SIGNALS:
     void segmentsChanged();
     void lastSegmentChanged();
