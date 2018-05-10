@@ -10,7 +10,7 @@ Element {
     outputs: ["OUT"]
 
     onEvaluate: {
-        var s = getInputByName("IN");
-        setOutputByName("OUT", !s);
+        var a = input("IN");
+        setOutput("OUT", !a.value);
     }
 }

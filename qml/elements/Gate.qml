@@ -10,11 +10,11 @@ Element {
     outputs: ["OUT"]
 
     onEvaluate: {
-        var a = getInputByName("IN");
-        var b = getInputByName("ONOFF");
-        if (!!b)
-            setOutputByName("OUT", a);
+        var a = input("IN");
+        var b = input("ONOFF");
+        if (!!b.value)
+            setOutput("OUT", a.value);
         else
-            setOutputByName("OUT", 0);
+            setOutput("OUT", 0);
     }
 }

@@ -1,6 +1,10 @@
+#include <QXmlStreamWriter>
+
 #include "wire.h"
 #include "connector.h"
 #include "element.h"
+
+int Wire::_idCount = 0;
 
 Wire::Wire(QQuickItem *parent) :
     Item(parent)
@@ -17,6 +21,9 @@ Wire::Wire(QQuickItem *parent) :
             this, &Wire::checkQuadrant);
     connect(this, &Wire::dyChanged,
             this, &Wire::checkQuadrant);
+
+    _id = QString("%1").arg(Wire::_idCount);
+    Wire::_idCount++;
 }
 
 Wire::~Wire()
@@ -104,6 +111,12 @@ void Wire::connectTo(Element *element,
         setInputElement(element);
         connect(_output, &Connector::valueChanged,
                 _input, &Connector::setValue);
+        QString n = QString("%1:%2-%3:%4").
+            arg(_outputElement->name()).
+            arg(_output->name()).
+            arg(_inputElement->name()).
+            arg(_input->name());
+        setName(n);
     } else {
         Q_ASSERT(!_input);
         Q_ASSERT(!_output);
@@ -118,8 +131,10 @@ void Wire::connectTo(Element *element,
 }
 
 void Wire::toXml(QXmlStreamWriter &stream) {
-    Q_UNUSED(stream);
-    Q_ASSERT(false);
+    stream.writeStartElement("Wire");
+    stream.writeAttribute("id", _id);
+    stream.writeAttribute("name", _name);
+    stream.writeEndElement();
 }
 
 void Wire::checkQuadrant() {

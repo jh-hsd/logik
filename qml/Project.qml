@@ -1,10 +1,10 @@
 import QtQuick 2.7
+import org.jh 1.0
 
 import "./elements" as Element
 
-Rectangle {
+BaseProject {
     id: project
-    color: "lightblue"
         
     property var _wire: null
 
@@ -17,7 +17,7 @@ Rectangle {
         var comp = Qt.createComponent("Wire.qml");
         var pos = mapFromItem(conn, 0, 0);
         centerPos(conn, pos);
-        _wire = comp.createObject(project, {});
+        _wire = comp.createObject(project, { "mode": Item.Project });
         _wire.init(elem, conn, pos);
     }
 
@@ -39,6 +39,11 @@ Rectangle {
         if (!_wire) return;
         _wire.destroy();
         _wire = null;
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "lightblue"
     }
 
     MouseArea {

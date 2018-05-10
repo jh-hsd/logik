@@ -1,3 +1,5 @@
+#include <QXmlStreamWriter>
+
 #include "element.h"
 #include "item.h"
 
@@ -40,7 +42,55 @@ void Element::setOutputs(QStringList &outputs)
     Q_EMIT outputsChanged();
 }
 
-void Element::toXml(QXmlStreamWriter &stream) {
-    Q_UNUSED(stream);
-    Q_ASSERT(false);
+Connector* Element::input(QString name)
+{
+    if (!_inputs.contains(name))
+        return Q_NULLPTR;
+    if (!_connectors.contains(name))
+        return Q_NULLPTR;
+    return _connectors[name];
+}
+
+Connector* Element::output(QString name)
+{
+    if (!_outputs.contains(name))
+        return Q_NULLPTR;
+    if (!_connectors.contains(name))
+        return Q_NULLPTR;
+    return _connectors[name];
+}
+
+void Element::setInput(QString name, int val)
+{
+    if (!_inputs.contains(name))
+        return;
+    Connector *conn = _connectors[name];
+    conn->setValue(val);
+}
+
+void Element::setOutput(QString name, int val)
+{
+    if (!_outputs.contains(name))
+        return;
+    Connector *conn = _connectors[name];
+    conn->setValue(val);
+}
+
+void Element::addConnector(Connector *conn)
+{
+    if (_connectors.contains(conn->name()))
+        return;
+    _connectors[conn->name()] = conn;
+    connect(conn, SIGNAL(valueChanged(int)),
+            this, SIGNAL(evaluate()));
+    connect(conn, SIGNAL(modify(Connector *, int)),
+            this, SIGNAL(modify(Connector *, int)));
+}
+
+void Element::toXml(QXmlStreamWriter &stream)
+{
+    stream.writeStartElement("Element");
+    stream.writeAttribute("id", _id);
+    stream.writeAttribute("name", _name);
+    stream.writeEndElement();
 }

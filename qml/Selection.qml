@@ -40,6 +40,12 @@ ColumnLayout {
             architecture = main.architectures[i];
         }
     }
+
+    Button {
+        text: "Save"
+
+        onClicked: project.save()
+    }
     
     Flow {
         width: parent.width

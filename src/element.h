@@ -2,9 +2,10 @@
 #define _ELEMENT_
 
 #include <QQuickItem>
-#include "item.h"
+#include <QString>
 
-class QXmlStreamWriter;
+#include "item.h"
+#include "connector.h"
 
 class Element : public Item {
     Q_OBJECT
@@ -13,6 +14,8 @@ class Element : public Item {
     Q_PROPERTY(QStringList archs READ archs WRITE setArchs NOTIFY archsChanged)
     Q_PROPERTY(QStringList inputs READ inputs WRITE setInputs NOTIFY inputsChanged)
     Q_PROPERTY(QStringList outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
+
+    friend class Connector;
 
 public:
     Element(QQuickItem *parent = Q_NULLPTR);
@@ -28,6 +31,14 @@ public:
     void setInputs(QStringList &inputs);
     void setOutputs(QStringList &outputs);
 
+    Q_INVOKABLE Connector* input(QString name);
+    Q_INVOKABLE Connector* output(QString name);
+    Q_INVOKABLE void setInput(QString name, int val);
+    Q_INVOKABLE void setOutput(QString name, int val);
+
+protected:
+    void addConnector(Connector *conn);
+
 public Q_SLOTS:
     virtual void toXml(QXmlStreamWriter &stream);
 
@@ -37,6 +48,9 @@ Q_SIGNALS:
     void inputsChanged();
     void outputsChanged();
 
+    void evaluate();
+    void modify(Connector *conn, int direction);
+
 private:
     static int _idCount;
 
@@ -45,6 +59,8 @@ private:
     QStringList _archs;
     QStringList _inputs;
     QStringList _outputs;
+
+    QHash<QString, Connector *> _connectors;
 };
 
 #endif

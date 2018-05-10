@@ -15,7 +15,6 @@ BaseConnector {
     }
 
     signal clicked()
-    signal modify(var conn, int direction)
     signal startWire(var conn)
     signal stopWire(var conn)
 
@@ -28,7 +27,6 @@ BaseConnector {
     onClicked: log("connector.clicked")
     onStartWire: log("connector.startWire: " + conn.name)
     onStopWire: log("connector.stopWire: " + conn.name)
-    onModify: log("connector.modify: " + conn.name + " -> " + direction)
             
     Keys.onPressed: {
         switch (event.key) {

@@ -17,10 +17,8 @@ BaseElement {
     property alias dragable: mouse.dragActive
 
     signal clicked()
-    signal modify(var conn, int direction)
     signal inputClicked(string name)
     signal outputClicked(string name)
-    signal evaluate()
     signal startWire(var element, var conn)
     signal stopWire(var element, var conn)
 
@@ -29,44 +27,6 @@ BaseElement {
     onOutputClicked: log("element.outputClicked: " + name)
     onStartWire: log("element.startWire: " + element.name + ":" + conn.name)
     onStopWire: log("element.stopWire: " + element.name + ":" + conn.name)
-
-    Component.onCompleted: {
-        console.log("Element position: (x/y/width/height)",
-                    element.x, element.y, element.width, element.height);
-        for (var i = 0; i < inputs.length; i++) {
-            console.log("Element connector position: (x/y/width/height)",
-                        inputsRow.children[i].x,
-                        inputsRow.children[i].y,
-                        inputsRow.children[i].width,
-                        inputsRow.children[i].height);
-        }
-    }
-
-    function _findConnectorByName(cs, n) {
-        for (var i = 0; i < cs.length; i++)
-            if (cs[i].name === n) return cs[i];
-        return null;
-    }
-
-    function setInputByName(name, val) {
-        var c = _findConnectorByName(inputsRow.children, name);
-        if (!!c) c.value = val;
-    }
-
-    function setOutputByName(name, val) {
-        var c = _findConnectorByName(outputsRow.children, name);
-        if (!!c) c.value = val;
-    }
-
-    function getInputByName(name) {
-        var c = _findConnectorByName(inputsRow.children, name);
-        return (!!c ? c.value : null);
-    }
-
-    function getOutputByName(name) {
-        var c = _findConnectorByName(outputsRow.children, name);
-        return (!!c ? c.value : null);
-    }
 
     Rectangle {
         anchors.fill: parent
@@ -132,10 +92,8 @@ BaseElement {
                 owner: element
                 topValue: true
                 onClicked: element.inputClicked(name)
-                onModify: element.modify(conn, direction)
                 onStartWire: element.startWire(element, conn)
                 onStopWire: element.stopWire(element, conn)
-                onValueChanged: element.evaluate()
             }
         }
     }
@@ -156,7 +114,6 @@ BaseElement {
                 owner: element
                 topValue: false
                 onClicked: element.outputClicked(name)
-                onModify: element.modify(conn, direction)
                 onStartWire: element.startWire(element, conn)
                 onStopWire: element.stopWire(element, conn)
             }

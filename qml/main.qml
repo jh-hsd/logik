@@ -24,7 +24,7 @@ Window {
     color: "grey"
 
     property int connectorSize: 20
-    property int connectorSpacing: 10
+    property int connectorSpacing: 20
     property string architecture: "RPi"
     property string operationMode: "sim" /* sim | run */
     property bool simulation: operationMode == "sim"
@@ -60,6 +60,7 @@ Window {
                 log("Selection.onPlaceInProject: " + file);
                 var comp = Qt.createComponent(file);
                 var obj = comp.createObject(project, {
+                    "mode": Item.Project,
                     "x": 0.5 * project.width,
                     "y": 0.5 * project.height,
                     "dragable": true

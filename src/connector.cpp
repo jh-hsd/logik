@@ -1,4 +1,5 @@
 #include "connector.h"
+#include "element.h"
 
 Connector::Connector(QQuickItem *parent) :
     Item(parent),
@@ -18,6 +19,12 @@ Connector::~Connector()
 
 void Connector::setName(QString &name)
 {
+    if (_owner && !_name.isEmpty()) {
+        Element *elem = qobject_cast<Element *>(_owner);
+        if (elem)
+            elem->addConnector(this);
+    }
+
     if (name != _name) {
         _name = name;
         Q_EMIT nameChanged();
@@ -34,6 +41,12 @@ void Connector::setDirection(Direction direction)
 
 void Connector::setOwner(QQuickItem *owner)
 {
+    if (owner && !_name.isEmpty()) {
+        Element *elem = qobject_cast<Element *>(owner);
+        if (elem)
+            elem->addConnector(this);
+    }
+
     if (owner != _owner) {
         _owner = owner;
         Q_EMIT ownerChanged();

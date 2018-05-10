@@ -2,9 +2,8 @@
 #define _CONNECTOR_
 
 #include <QQuickItem>
-#include "item.h"
 
-class QXmlStreamWriter;
+#include "item.h"
 
 class Connector : public Item {
     Q_OBJECT
@@ -44,9 +43,10 @@ Q_SIGNALS:
     void directionChanged();
     void inputChanged();
     void outputChanged();
-
     void ownerChanged();
     void valueChanged(int value);
+
+    void modify(Connector *conn, int direction);
 
 private:
     Direction _direction;

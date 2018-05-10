@@ -10,8 +10,8 @@ Element {
     outputs: ["OUT"]
 
     onEvaluate: {
-        var a = getInputByName("IN1");
-        var b = getInputByName("IN2");
-        setOutputByName("OUT", !!a & !!b);
+        var a = input("IN1");
+        var b = input("IN2");
+        setOutput("OUT", !!a.value & !!b.value);
     }
 }

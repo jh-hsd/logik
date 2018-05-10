@@ -2,6 +2,7 @@
 #define _WIRE_
 
 #include <QQuickItem>
+
 #include "item.h"
 
 class QXmlStreamWriter;
@@ -81,8 +82,11 @@ Q_SIGNALS:
     void quadrantChanged();
 
 private:
+    static int _idCount;
+
     void checkQuadrant();
 
+    QString _id;
     QList<QQuickItem*> _segments;
     Connector *_input = NULL;
     Connector *_output = NULL;
