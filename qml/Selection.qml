@@ -1,71 +1,99 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.0
 
+import org.jh 1.0
 import "./elements" as Element
 
-ColumnLayout {
+BaseSelection {
     id: selection
-    spacing: 2
 
-    signal placeInProject(string comp)
+    ColumnLayout {
+        anchors.fill: parent
+        spacing: 2
 
-    Button {
-        text: {
-            switch (main.operationMode) {
-            case "sim" : return "Run";
-            case "run" : return "Simulation";
+        Button {
+            text: {
+                switch (main.operationMode) {
+                case "sim" : return "Run";
+                case "run" : return "Simulation";
+                }
+            }
+            onClicked: {
+                switch (main.operationMode) {
+                case "sim" :
+                    main.operationMode = "run";
+                    break;
+                case "run" :
+                    main.operationMode = "sim";
+                    break;
+                }
             }
         }
-        onClicked: {
-            switch (main.operationMode) {
-            case "sim" :
-                main.operationMode = "run";
-                break;
-            case "run" :
-                main.operationMode = "sim";
-                break;
+
+        Button {
+            text: "Architecture<br><b>" + architecture + "</b>"
+            active: !!architecture
+
+            onClicked: {
+                var i = selection.architectures.indexOf(architecture);
+                i++;
+                if (i == selection.architectures.length)
+                    i = 0;
+                architecture = selection.architectures[i];
             }
         }
-    }
 
-    Button {
-        text: "Architecture<br><b>" + architecture + "</b>"
-        active: !!architecture
+        Button {
+            text: "Save"
 
-        onClicked: {
-            var i = main.architectures.indexOf(architecture);
-            i++;
-            if (i == main.architectures.length)
-                i = 0;
-            architecture = main.architectures[i];
+            onClicked: fileDialog.visible = true
+
+            FileDialog {
+                id: fileDialog
+                title: "Select project file"
+                selectMultiple: false
+                selectFolder: false
+                folder: shortcuts.home
+                nameFilters: [ "XML files (*.xml)" ]
+                selectExisting: false
+                onAccepted: {
+                    project.save(fileDialog.fileUrl);
+                    visible = false;
+                }
+            }
         }
-    }
 
-    Button {
-        text: "Save"
+        Flickable {
+            width: parent.width
 
-        onClicked: project.save()
-    }
-    
-    Flow {
-        width: parent.width
-        spacing: 2 * connectorSize
-        padding: spacing
+            Layout.preferredWidth: width
+            Layout.fillHeight: true
 
-        Layout.preferredWidth: width
-        Layout.fillHeight: true
+            clip: true
+            contentWidth: width
+            contentHeight: elementFlow.height
 
-        Repeater {
-            model: main.elements
-            delegate: Loader {
-                id: elementLoader
-                asynchronous: false
-                source: "./elements/" + modelData + ".qml"
-
-                Connections {
-                    target: item
-                    ignoreUnknownSignals: true
-                    onClicked: selection.placeInProject(modelData);
+            Flow {
+                id: elementFlow
+                width: parent.width
+                height: implicitHeight
+                spacing: 2 * connectorSize
+                padding: spacing
+                
+                Repeater {
+                    model: selection.elements
+                    delegate: Loader {
+                        id: elementLoader
+                        asynchronous: false
+                        source: "./elements/" + modelData + ".qml"
+                        
+                        Connections {
+                            target: item
+                            ignoreUnknownSignals: true
+                            onClicked: selection.placeInProject(modelData);
+                        }
+                    }
                 }
             }
         }

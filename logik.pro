@@ -19,6 +19,7 @@ OBJECTS_DIR    += build
 
 # Input
 HEADERS        += src/item.h \
+                  src/selection.h \
                   src/project.h \
                   src/element.h \
                   src/wire.h \
@@ -26,6 +27,7 @@ HEADERS        += src/item.h \
 
 SOURCES        += src/main.cpp \
                   src/item.cpp \
+                  src/selection.cpp \
                   src/project.cpp \
                   src/element.cpp \
                   src/wire.cpp \
