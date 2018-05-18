@@ -35,6 +35,16 @@ void Item::setMode(Mode mode)
     }
 }
 
+void Item::toXml(QXmlStreamWriter &stream)
+{
+    stream.writeAttribute("name", _name);
+    stream.writeAttribute("id", identifier());
+    stream.writeAttribute("x", QString("%1").arg(x()));
+    stream.writeAttribute("y", QString("%1").arg(y()));
+    stream.writeAttribute("width", QString("%1").arg(width()));
+    stream.writeAttribute("height", QString("%1").arg(height()));
+}
+
 void Item::toArduino(QTextStream &stream) {
     Q_UNUSED(stream);
     Q_ASSERT(false);
