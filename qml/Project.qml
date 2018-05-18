@@ -1,4 +1,5 @@
 import QtQuick 2.7
+
 import org.jh 1.0
 
 import "./elements" as Element
@@ -41,6 +42,10 @@ BaseProject {
         _wire = null;
     }
 
+    function requestText(obj, btnText, text) {
+        parameterEntry.requestText(obj, btnText, text);
+    }
+
     Rectangle {
         anchors.fill: parent
         color: "lightblue"
@@ -75,5 +80,7 @@ BaseProject {
         id: notifier
     }
 
-    /* ParameterEntry {} */
+    ParameterEntry {
+        id: parameterEntry
+    }
 }
