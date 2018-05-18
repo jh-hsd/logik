@@ -1,11 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "selection.h"
 #include "project.h"
 #include "element.h"
 #include "connector.h"
 #include "wire.h"
-#include "item.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<Selection>("org.jh", 1, 0, "BaseSelection");
     qmlRegisterType<Project>("org.jh", 1, 0, "BaseProject");
     qmlRegisterType<Element>("org.jh", 1, 0, "BaseElement");
     qmlRegisterType<Connector>("org.jh", 1, 0, "BaseConnector");
