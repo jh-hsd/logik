@@ -7,6 +7,7 @@ Rectangle {
     Layout.preferredWidth: width
     Layout.preferredHeight: height
 
+    property alias label: label
     property alias text: label.text
     property bool active: false
 
