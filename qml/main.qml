@@ -25,13 +25,9 @@ Window {
 
     property int connectorSize: 20
     property int connectorSpacing: 20
-    property string architecture: "RPi"
+    property string architecture: selection.architectures[0]
     property string operationMode: "sim" /* sim | run */
     property bool simulation: operationMode == "sim"
-
-    property var architectures: ["RPi", "Arduino"]
-    property var elements: ["Not", "And", "Or",, "Gate",
-                            "Gpi", "Gpo", "Pwm"]
 
     property bool _debug: true
 
