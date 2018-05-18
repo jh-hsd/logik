@@ -82,11 +82,8 @@ Q_SIGNALS:
     void quadrantChanged();
 
 private:
-    static int _idCount;
-
     void checkQuadrant();
 
-    QString _id;
     QList<QQuickItem*> _segments;
     Connector *_input = NULL;
     Connector *_output = NULL;

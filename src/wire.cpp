@@ -4,8 +4,6 @@
 #include "connector.h"
 #include "element.h"
 
-int Wire::_idCount = 0;
-
 Wire::Wire(QQuickItem *parent) :
     Item(parent)
 {
@@ -21,9 +19,6 @@ Wire::Wire(QQuickItem *parent) :
             this, &Wire::checkQuadrant);
     connect(this, &Wire::dyChanged,
             this, &Wire::checkQuadrant);
-
-    _id = QString("%1").arg(Wire::_idCount);
-    Wire::_idCount++;
 }
 
 Wire::~Wire()

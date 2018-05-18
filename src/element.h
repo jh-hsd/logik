@@ -52,9 +52,6 @@ Q_SIGNALS:
     void modify(Connector *conn, int direction);
 
 private:
-    static int _idCount;
-
-    QString _id;
     QString _desc;
     QStringList _archs;
     QStringList _inputs;

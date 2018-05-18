@@ -1,12 +1,17 @@
+#include <QXmlStreamWriter>
+
 #include "item.h"
 
 QList<Item *> Item::_items;
+int Item::_idCount = 0;
 
 Item::Item(QQuickItem *parent) :
     QQuickItem(parent),
     _mode(Selection)
 {
     Item::_items << this;
+    _id = QString("%1").arg(Item::_idCount);
+    Item::_idCount++;
 }
 
 Item::~Item()
