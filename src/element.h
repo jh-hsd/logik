@@ -15,6 +15,9 @@ class Element : public Item {
     Q_PROPERTY(QStringList inputs READ inputs WRITE setInputs NOTIFY inputsChanged)
     Q_PROPERTY(QStringList outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
 
+    Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
+    Q_PROPERTY(QString evalInC READ evalInC WRITE setEvalInC NOTIFY evalInCChanged)
+
     friend class Connector;
 
 public:
@@ -26,27 +29,39 @@ public:
     const QStringList &inputs() const { return _inputs; };
     const QStringList &outputs() const { return _outputs; };
 
+    const QString &evalInC() const { return _evalInC; };
+    const QString &fileName() const { return _fileName; };
+
     void setDesc(QString &desc);
     void setArchs(QStringList &archs);
     void setInputs(QStringList &inputs);
     void setOutputs(QStringList &outputs);
 
-    Q_INVOKABLE Connector* input(QString name);
-    Q_INVOKABLE Connector* output(QString name);
+    void setEvalInC(QString &code);
+    void setFileName(QString &fn);
+
+    Q_INVOKABLE Connector *input(QString name);
+    Q_INVOKABLE Connector *output(QString name);
     Q_INVOKABLE void setInput(QString name, int val);
     Q_INVOKABLE void setOutput(QString name, int val);
+    Q_INVOKABLE int inputValue(QString name);
+    Q_INVOKABLE int outputValue(QString name);
 
 protected:
     void addConnector(Connector *conn);
 
 public Q_SLOTS:
     virtual void toXml(QXmlStreamWriter &stream);
+    virtual void toArduino(QTextStream &stream);
 
 Q_SIGNALS:
     void descChanged();
     void archsChanged();
     void inputsChanged();
     void outputsChanged();
+
+    void evalInCChanged();
+    void fileNameChanged();
 
     void evaluate();
     void modify(Connector *conn, int direction);
@@ -56,6 +71,9 @@ private:
     QStringList _archs;
     QStringList _inputs;
     QStringList _outputs;
+
+    QString _evalInC;
+    QString _fileName;
 
     QHash<QString, Connector *> _connectors;
 };

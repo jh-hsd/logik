@@ -40,12 +40,12 @@ public:
     virtual ~Wire();
 
     QList<QQuickItem*> segments() const { return _segments; };
-    QQuickItem* lastSegment();
+    QQuickItem *lastSegment();
     int segmentCount() const { return _segments.count(); };
-    Connector* input() const { return _input; };
-    Connector* output() const { return _output; };
-    Element* inputElement() const { return _inputElement; };
-    Element* outputElement() const { return _outputElement; };
+    Connector *input() const { return _input; };
+    Connector *output() const { return _output; };
+    Element *inputElement() const { return _inputElement; };
+    Element *outputElement() const { return _outputElement; };
     qreal dx() const { return _dx; };
     qreal dy() const { return _dy; };
     qreal dxAbs() const { return abs(_dx); };

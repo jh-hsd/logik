@@ -38,7 +38,19 @@ void Element::setOutputs(QStringList &outputs)
     Q_EMIT outputsChanged();
 }
 
-Connector* Element::input(QString name)
+void Element::setEvalInC(QString &code)
+{
+    _evalInC = code;
+    Q_EMIT evalInCChanged();
+}
+
+void Element::setFileName(QString &fn)
+{
+    _fileName = fn;
+    Q_EMIT fileNameChanged();
+}
+
+Connector *Element::input(QString name)
 {
     if (!_inputs.contains(name))
         return Q_NULLPTR;
@@ -47,13 +59,29 @@ Connector* Element::input(QString name)
     return _connectors[name];
 }
 
-Connector* Element::output(QString name)
+Connector *Element::output(QString name)
 {
     if (!_outputs.contains(name))
         return Q_NULLPTR;
     if (!_connectors.contains(name))
         return Q_NULLPTR;
     return _connectors[name];
+}
+
+int Element::inputValue(QString name)
+{
+    Connector *inp = input(name);
+    if (inp)
+        return inp->value();
+    return -1;
+}
+
+int Element::outputValue(QString name)
+{
+    Connector *outp = output(name);
+    if (outp)
+        return outp->value();
+    return -1;
 }
 
 void Element::setInput(QString name, int val)
@@ -86,7 +114,12 @@ void Element::addConnector(Connector *conn)
 void Element::toXml(QXmlStreamWriter &stream)
 {
     stream.writeStartElement("Element");
-    stream.writeAttribute("id", _id);
-    stream.writeAttribute("name", _name);
+    Item::toXml(stream);
+    stream.writeAttribute("fileName", fileName());
     stream.writeEndElement();
+}
+
+void Element::toArduino(QTextStream &stream) {
+    stream << "/* Boilerplate for " << name() << " (" <<
+        identifier() << ") */";
 }

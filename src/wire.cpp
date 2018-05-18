@@ -127,8 +127,17 @@ void Wire::connectTo(Element *element,
 
 void Wire::toXml(QXmlStreamWriter &stream) {
     stream.writeStartElement("Wire");
-    stream.writeAttribute("id", _id);
-    stream.writeAttribute("name", _name);
+    Item::toXml(stream);
+
+    const auto &segmentsCopy = _segments;
+    for(const auto &segment : segmentsCopy) {
+        stream.writeStartElement("Segment");
+        stream.writeAttribute("x", QString("%1").arg(segment->x()));
+        stream.writeAttribute("y", QString("%1").arg(segment->y()));
+        stream.writeAttribute("width", QString("%1").arg(segment->width()));
+        stream.writeAttribute("height", QString("%1").arg(segment->height()));
+        stream.writeEndElement();
+    }
     stream.writeEndElement();
 }
 
