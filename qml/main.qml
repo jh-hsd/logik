@@ -56,13 +56,16 @@ Window {
                 log("Selection.onPlaceInProject: " + file);
                 var comp = Qt.createComponent(file);
                 var obj = comp.createObject(project, {
+                    "fileName": file,
                     "mode": Item.Project,
                     "x": 0.5 * project.width,
                     "y": 0.5 * project.height,
-                    "dragable": true
+                    "dragable": true,
+                    "writable": true
                 });
                 obj.startWire.connect(project.startWire);
                 obj.stopWire.connect(project.stopWire);
+                obj.adjustName.connect(project.requestText);
             }
         }
 
