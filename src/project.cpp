@@ -14,8 +14,9 @@ Project::~Project()
 {
 }
 
-void Project::save()
+void Project::save(QUrl fileUrl)
 {
+    Q_UNUSED(fileUrl);
     QString xml;
     QXmlStreamWriter stream(&xml);
 
@@ -23,7 +24,6 @@ void Project::save()
     stream.writeStartDocument();
 
     const auto &childItemsCopy = childItems();
-
     for(const auto &item : childItemsCopy) {
         Element *elem = qobject_cast<Element *>(item);
         if (elem)

@@ -3,6 +3,7 @@
 
 #include <QQuickItem>
 #include <QString>
+#include <QUrl>
 
 #include "item.h"
 #include "connector.h"
@@ -14,7 +15,7 @@ public:
     Project(QQuickItem *parent = Q_NULLPTR);
     virtual ~Project();
 
-    Q_INVOKABLE void save();
+    Q_INVOKABLE void save(QUrl fileUrl);
 
 public Q_SLOTS:
     virtual void toXml(QXmlStreamWriter &stream);
