@@ -6,7 +6,7 @@ Element {
 
     desc: qsTr("GPI")
     name: qsTr("input")
-    archs: ["RPi"]
+    archs: ["RPi", "Arduino"]
     outputs: ["OUT"]
 
     onModify: conn.value = !conn.value
