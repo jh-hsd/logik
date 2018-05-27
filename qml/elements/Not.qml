@@ -8,9 +8,5 @@ Element {
     name: qsTr("not")
     inputs: ["IN"]
     outputs: ["OUT"]
-
-    onEvaluate: {
-        var a = input("IN");
-        setOutput("OUT", !a.value);
-    }
+    evalCode: "setOutput('OUT', !inputValue('IN'))"
 }

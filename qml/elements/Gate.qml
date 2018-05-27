@@ -8,13 +8,5 @@ Element {
     name: qsTr("Gate")
     inputs: ["IN", "ONOFF"]
     outputs: ["OUT"]
-
-    onEvaluate: {
-        var a = input("IN");
-        var b = input("ONOFF");
-        if (!!b.value)
-            setOutput("OUT", a.value);
-        else
-            setOutput("OUT", 0);
-    }
+    evalCode: "setOutput('OUT', !!inputValue('ONOFF') ? inputValue('IN') : 0"
 }

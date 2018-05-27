@@ -31,6 +31,8 @@ BaseElement {
     onStartWire: log("element.startWire: " + element.name + ":" + conn.name)
     onStopWire: log("element.stopWire: " + element.name + ":" + conn.name)
 
+    onEvaluate: eval(evalCode)
+
     function updateName(text) {
         element.name = text;
     }

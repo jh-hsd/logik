@@ -15,6 +15,7 @@ class Element : public Item {
     Q_PROPERTY(QStringList inputs READ inputs WRITE setInputs NOTIFY inputsChanged)
     Q_PROPERTY(QStringList outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
     Q_PROPERTY(QString param READ param WRITE setParam NOTIFY paramChanged)
+    Q_PROPERTY(QString evalCode READ evalCode WRITE setEvalCode NOTIFY evalCodeChanged)
 
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
 
@@ -29,6 +30,7 @@ public:
     const QStringList &inputs() const { return _inputs; };
     const QStringList &outputs() const { return _outputs; };
     const QString &param() const { return _param; };
+    const QString &evalCode() const { return _evalCode; };
 
     const QString &fileName() const { return _fileName; };
 
@@ -37,8 +39,8 @@ public:
     void setInputs(QStringList &inputs);
     void setOutputs(QStringList &outputs);
     void setParam(QString &param);
+    void setEvalCode(QString &evalCode);
 
-    void setEvalInC(QString &code);
     void setFileName(QString &fn);
 
     Q_INVOKABLE Connector *input(QString name);
@@ -61,6 +63,7 @@ Q_SIGNALS:
     void inputsChanged();
     void outputsChanged();
     void paramChanged();
+    void evalCodeChanged();
 
     void fileNameChanged();
 
@@ -73,6 +76,7 @@ private:
     QStringList _inputs;
     QStringList _outputs;
     QString _param;
+    QString _evalCode;
 
     QString _fileName;
 

@@ -46,6 +46,12 @@ void Element::setParam(QString &param)
     }
 }
 
+void Element::setEvalCode(QString &evalCode)
+{
+    _evalCode = evalCode;
+    Q_EMIT evalCodeChanged();
+}
+
 void Element::setFileName(QString &fn)
 {
     _fileName = fn;

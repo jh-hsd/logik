@@ -8,10 +8,5 @@ Element {
     name: qsTr("and")
     inputs: ["IN1", "IN2"]
     outputs: ["OUT"]
-
-    onEvaluate: {
-        var a = input("IN1");
-        var b = input("IN2");
-        setOutput("OUT", !!a.value & !!b.value);
-    }
+    evalCode: "setOutput('OUT', !!inputValue('IN1') && !!inputValue('IN2'))"
 }
