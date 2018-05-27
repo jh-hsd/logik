@@ -7,10 +7,10 @@ BaseElement {
     height: visible ? 100 : 0
     visible: (!architecture || archs.indexOf(architecture) >= 0)
     
+    archs: ["RPi", "Arduino"]
     name: "<?>"
     desc: "<?>"
     param: ""
-    archs: ["RPi", "Arduino", "Component"]
 
     property int _maxConnectors: Math.max(inputs.length, outputs.length)
     property int _minWidth: _maxConnectors * connectorSize +
