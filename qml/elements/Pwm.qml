@@ -6,6 +6,7 @@ Element {
 
     desc: qsTr("PWM")
     name: qsTr("control")
+    param: "0"
     archs: ["RPi", "Arduino"]
     outputs: ["OUT"]
 
@@ -17,5 +18,6 @@ Element {
             conn.value = 0;
         else
             conn.value = v;
+        param = conn.value.toString();
     }
 }

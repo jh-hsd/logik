@@ -9,6 +9,7 @@ BaseElement {
     
     name: "<?>"
     desc: "<?>"
+    param: ""
     archs: ["RPi", "Arduino", "Component"]
 
     property int _maxConnectors: Math.max(inputs.length, outputs.length)
@@ -22,7 +23,7 @@ BaseElement {
     signal outputClicked(string name)
     signal startWire(var element, var conn)
     signal stopWire(var element, var conn)
-    signal adjustName(var element, string btnText, string text)
+    signal adjustText(var setup)
 
     onClicked: log("element.clicked")
     onInputClicked: log("element.inputClicked: " + name)
@@ -30,8 +31,12 @@ BaseElement {
     onStartWire: log("element.startWire: " + element.name + ":" + conn.name)
     onStopWire: log("element.stopWire: " + element.name + ":" + conn.name)
 
-    function textChange(text) {
+    function updateName(text) {
         element.name = text;
+    }
+
+    function updateParam(text) {
+        element.param = text;
     }
 
     Rectangle {
@@ -67,24 +72,68 @@ BaseElement {
     }
 
     Column {
+        id: textCol
         anchors.centerIn: parent
-        Text {
-            id: nameText
-            text: element.name
-            font.pixelSize: 0.2 * element.height
+        property real scaler: !!param ? 0.12 : 0.2
+
+        Rectangle {
+            width: nameText.contentWidth
+            height: nameText.contentHeight
             anchors.horizontalCenter: parent.horizontalCenter
+            color: nameMouse.containsMouse ? "yellow" : "lightyellow"
+
+            Text {
+                id: nameText
+                anchors.centerIn: parent
+                text: element.name
+                font.pixelSize: textCol.scaler * element.height
+            }
 
             MouseArea {
+                id: nameMouse
                 anchors.fill: parent
+                hoverEnabled: true
                 enabled: writable
-                onClicked: element.adjustName(element, "", element.name)
+                onClicked: element.adjustText({
+                    btnText: "",
+                    text: element.name,
+                    callback: function(t) { element.name = t; }
+                })
             }
         }
+
         Text {
             id: descText
             text: element.desc
-            font.pixelSize: 0.2 * element.height
+            font.pixelSize: textCol.scaler * element.height
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Rectangle {
+            width: paramText.contentWidth
+            height: visible ? paramText.contentHeight : 0
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: paramMouse.containsMouse ? "yellow" : "lightyellow"
+            visible: !!element.param
+
+            Text {
+                id: paramText
+                anchors.centerIn: parent
+                text: "[" + element.param + "]"
+                font.pixelSize: textCol.scaler * element.height
+            }
+
+            MouseArea {
+                id: paramMouse
+                anchors.fill: parent
+                hoverEnabled: true
+                enabled: writable
+                onClicked: element.adjustText({
+                    btnText: "",
+                    text: element.param,
+                    callback: function(t) { element.param = t; }
+                })
+            }
         }
     }
 

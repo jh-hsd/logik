@@ -14,6 +14,7 @@ class Element : public Item {
     Q_PROPERTY(QStringList archs READ archs WRITE setArchs NOTIFY archsChanged)
     Q_PROPERTY(QStringList inputs READ inputs WRITE setInputs NOTIFY inputsChanged)
     Q_PROPERTY(QStringList outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
+    Q_PROPERTY(QString param READ param WRITE setParam NOTIFY paramChanged)
 
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
 
@@ -27,6 +28,7 @@ public:
     const QStringList &archs() const { return _archs; };
     const QStringList &inputs() const { return _inputs; };
     const QStringList &outputs() const { return _outputs; };
+    const QString &param() const { return _param; };
 
     const QString &fileName() const { return _fileName; };
 
@@ -34,6 +36,7 @@ public:
     void setArchs(QStringList &archs);
     void setInputs(QStringList &inputs);
     void setOutputs(QStringList &outputs);
+    void setParam(QString &param);
 
     void setEvalInC(QString &code);
     void setFileName(QString &fn);
@@ -57,6 +60,7 @@ Q_SIGNALS:
     void archsChanged();
     void inputsChanged();
     void outputsChanged();
+    void paramChanged();
 
     void fileNameChanged();
 
@@ -68,6 +72,7 @@ private:
     QStringList _archs;
     QStringList _inputs;
     QStringList _outputs;
+    QString _param;
 
     QString _fileName;
 

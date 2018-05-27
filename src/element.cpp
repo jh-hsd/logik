@@ -38,6 +38,14 @@ void Element::setOutputs(QStringList &outputs)
     Q_EMIT outputsChanged();
 }
 
+void Element::setParam(QString &param)
+{
+    if (_param != param) {
+        _param = param;
+        Q_EMIT paramChanged();
+    }
+}
+
 void Element::setFileName(QString &fn)
 {
     _fileName = fn;

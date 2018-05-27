@@ -6,6 +6,7 @@ Element {
 
     desc: qsTr("GPO")
     name: qsTr("output")
+    param: "1"
     archs: ["RPi", "Arduino"]
     inputs: ["IN"]
 }

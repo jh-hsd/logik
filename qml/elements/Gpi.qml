@@ -6,6 +6,7 @@ Element {
 
     desc: qsTr("GPI")
     name: qsTr("input")
+    param: "1"
     archs: ["RPi", "Arduino"]
     outputs: ["OUT"]
 

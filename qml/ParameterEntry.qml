@@ -10,21 +10,27 @@ Rectangle {
     anchors.topMargin: show ? -height : 0
 
     property bool show: false
+    property var setup: null
     property alias btnText: applyBtn.text
     property alias text: input.text
-    property var sourceObj: null
 
     Behavior on anchors.topMargin {
         NumberAnimation { duration: 200 }
     }
 
-    function requestText(obj, btnText, text) {
-        parameterEntry.sourceObj = obj;
-        if (!btnText)
+    /*
+     * param is an object with properties
+     * - btnText: alternate apply button text, empty equals 'Apply'
+     * - text: what goes into the text edit field
+     * - callback: a function which is called on apply
+     */
+    function requestText(setup) {
+        parameterEntry.setup = setup;
+        if (!setup.btnText)
             parameterEntry.btnText = "Apply";
         else
-            parameterEntry.btnText = btnText;
-        parameterEntry.text = text;
+            parameterEntry.btnText = setup.btnText;
+        parameterEntry.text = setup.text;
         parameterEntry.show = true;
     }
 
@@ -36,9 +42,8 @@ Rectangle {
         text: "Apply"
 
         onClicked: {
-            if (!sourceObj || !show) return;
-            sourceObj.textChange(parameterEntry.text);
-            sourceObj = null;
+            if (!setup || !show) return;
+            setup.callback(parameterEntry.text);
             show = false;
         }
     }

@@ -65,7 +65,7 @@ Window {
                 });
                 obj.startWire.connect(project.startWire);
                 obj.stopWire.connect(project.stopWire);
-                obj.adjustName.connect(project.requestText);
+                obj.adjustText.connect(project.requestText);
             }
         }
 
