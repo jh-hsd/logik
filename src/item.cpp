@@ -45,7 +45,8 @@ void Item::toXml(QXmlStreamWriter &stream)
     stream.writeAttribute("height", QString("%1").arg(height()));
 }
 
-void Item::toArduino(QTextStream &stream) {
+void Item::toArch(QString &arch, QTextStream &stream) {
+    Q_UNUSED(arch);
     Q_UNUSED(stream);
     Q_ASSERT(false);
 }

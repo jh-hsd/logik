@@ -32,7 +32,7 @@ public:
 
 public Q_SLOTS:
     virtual void toXml(QXmlStreamWriter &stream);
-    virtual void toArduino(QTextStream &stream);
+    virtual void toArch(QString &arch, QTextStream &stream);
 
 Q_SIGNALS:
     void identifierChanged();
