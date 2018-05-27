@@ -38,12 +38,6 @@ void Element::setOutputs(QStringList &outputs)
     Q_EMIT outputsChanged();
 }
 
-void Element::setEvalInC(QString &code)
-{
-    _evalInC = code;
-    Q_EMIT evalInCChanged();
-}
-
 void Element::setFileName(QString &fn)
 {
     _fileName = fn;

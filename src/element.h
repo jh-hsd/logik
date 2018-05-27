@@ -16,7 +16,6 @@ class Element : public Item {
     Q_PROPERTY(QStringList outputs READ outputs WRITE setOutputs NOTIFY outputsChanged)
 
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName NOTIFY fileNameChanged)
-    Q_PROPERTY(QString evalInC READ evalInC WRITE setEvalInC NOTIFY evalInCChanged)
 
     friend class Connector;
 
@@ -29,7 +28,6 @@ public:
     const QStringList &inputs() const { return _inputs; };
     const QStringList &outputs() const { return _outputs; };
 
-    const QString &evalInC() const { return _evalInC; };
     const QString &fileName() const { return _fileName; };
 
     void setDesc(QString &desc);
@@ -60,7 +58,6 @@ Q_SIGNALS:
     void inputsChanged();
     void outputsChanged();
 
-    void evalInCChanged();
     void fileNameChanged();
 
     void evaluate();
@@ -72,7 +69,6 @@ private:
     QStringList _inputs;
     QStringList _outputs;
 
-    QString _evalInC;
     QString _fileName;
 
     QHash<QString, Connector *> _connectors;
