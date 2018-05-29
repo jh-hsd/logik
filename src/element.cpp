@@ -108,6 +108,24 @@ void Element::setOutput(QString name, int val)
     conn->setValue(val);
 }
 
+int Element::pin(QString pin)
+{
+    Q_UNUSED(pin);
+    return 0;
+}
+
+void Element::mapOutputToPin(QString name, QString pin)
+{
+    Q_UNUSED(name);
+    Q_UNUSED(pin);
+}
+
+void Element::setPin(QString pin, int val)
+{
+    Q_UNUSED(val);
+    Q_UNUSED(pin);
+}
+
 void Element::fire() const
 {
     QHash<QString, Connector *>::const_iterator i;

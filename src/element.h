@@ -50,6 +50,10 @@ public:
     Q_INVOKABLE int inputValue(QString name);
     Q_INVOKABLE int outputValue(QString name);
 
+    Q_INVOKABLE int pin(QString pin);
+    Q_INVOKABLE void mapOutputToPin(QString name, QString pin);
+    Q_INVOKABLE void setPin(QString pin, int val);
+
     Q_INVOKABLE void fire() const;
 
 protected:
