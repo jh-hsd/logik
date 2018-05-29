@@ -23,6 +23,8 @@ Wire::Wire(QQuickItem *parent) :
 
 Wire::~Wire()
 {
+    disconnect(_output, &Connector::valueChanged,
+               _input, &Connector::setValue);
 }
 
 QQuickItem *Wire::lastSegment()
