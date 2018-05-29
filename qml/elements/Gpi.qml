@@ -9,6 +9,7 @@ Element {
     param: "1"
     archs: ["RPi", "Arduino"]
     outputs: ["OUT"]
+    evalCode: "mapOutputToPin('OUT', pin(gpi.param))"
 
     onModify: conn.value = !conn.value
 }
