@@ -36,6 +36,8 @@ public:
     void setOwner(QQuickItem *owner);
     void setValue(int value);
 
+    void fire();
+
 public Q_SLOTS:
     virtual void toXml(QXmlStreamWriter &stream);
 

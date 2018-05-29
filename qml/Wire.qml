@@ -102,6 +102,8 @@ BaseWire {
         _adjust(pos, elem);
         _freezeSegment();
         connectTo(elem, conn);
+        /* ensure that the wired output is updated according to the input */
+        outputElement.fire();
     }
 
     function update(pos) {

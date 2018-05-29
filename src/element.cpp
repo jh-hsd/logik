@@ -108,6 +108,13 @@ void Element::setOutput(QString name, int val)
     conn->setValue(val);
 }
 
+void Element::fire() const
+{
+    QHash<QString, Connector *>::const_iterator i;
+    for (i = _connectors.constBegin(); i != _connectors.constEnd(); ++i)
+        i.value()->fire();
+}
+
 void Element::addConnector(Connector *conn)
 {
     if (_connectors.contains(conn->name()))

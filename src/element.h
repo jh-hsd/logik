@@ -50,6 +50,8 @@ public:
     Q_INVOKABLE int inputValue(QString name);
     Q_INVOKABLE int outputValue(QString name);
 
+    Q_INVOKABLE void fire() const;
+
 protected:
     void addConnector(Connector *conn);
 

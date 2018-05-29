@@ -65,3 +65,8 @@ void Connector::toXml(QXmlStreamWriter &stream) {
     Q_UNUSED(stream);
     Q_ASSERT(false);
 }
+
+void Connector::fire()
+{
+    Q_EMIT valueChanged(_value);
+}
